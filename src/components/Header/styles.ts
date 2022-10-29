@@ -31,7 +31,7 @@ export const LocationMapLink = styled(BaseLink)`
   color: ${({ theme }) => theme.purple[900]};
 
   svg {
-    color: 0 0 0 1px ${({ theme }) => theme.purple[500]};
+    color: ${({ theme }) => theme.purple[500]};
   }
 `
 
