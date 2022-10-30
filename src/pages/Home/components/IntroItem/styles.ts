@@ -11,7 +11,7 @@ interface ItemBackgroundProps {
   itemColorBackground: keyof typeof ITEM_COLOR_BACKGROUND
 }
 
-export const HomeItemContainer = styled.div<ItemBackgroundProps>`
+export const IntroItemContainer = styled.div<ItemBackgroundProps>`
   display: flex;
   align-items: center;
   gap: 0.75rem;

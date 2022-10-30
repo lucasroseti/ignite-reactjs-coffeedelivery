@@ -1,29 +1,29 @@
 import { createElement } from 'react'
 import * as Icon from 'phosphor-react'
 
-import { HomeItemContainer, ITEM_COLOR_BACKGROUND } from './styles'
+import { IntroItemContainer, ITEM_COLOR_BACKGROUND } from './styles'
 
 export type ItemColorBackground = keyof typeof ITEM_COLOR_BACKGROUND
 
-interface HomeItemProps {
+interface IntroItemProps {
   background: ItemColorBackground
   description: string
   icon: string
 }
 
-export function HomeItem({
+export function IntroItem({
   background = 'gray',
   description,
   icon,
-}: HomeItemProps) {
+}: IntroItemProps) {
   return (
-    <HomeItemContainer itemColorBackground={background}>
+    <IntroItemContainer itemColorBackground={background}>
       <span>
         <Icon.IconContext.Provider value={{ size: 16, weight: 'fill' }}>
           {createElement(Icon[icon as keyof object])}
         </Icon.IconContext.Provider>
       </span>
       {description}
-    </HomeItemContainer>
+    </IntroItemContainer>
   )
 }

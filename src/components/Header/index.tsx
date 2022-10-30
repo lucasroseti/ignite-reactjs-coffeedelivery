@@ -1,6 +1,7 @@
 import { MapPin, ShoppingCart } from 'phosphor-react'
 
-import LogoCoffeeDeliverySVG from '../../assets/logo-coffee-delivery.svg'
+import { Images } from '../../assets'
+
 import {
   HeaderContainer,
   HomeLink,
@@ -12,7 +13,7 @@ export function Header() {
   return (
     <HeaderContainer>
       <HomeLink to="/" title="Home">
-        <img src={LogoCoffeeDeliverySVG} alt="" />
+        <img src={Images.LogoCoffeeDeliverySVG} alt="" />
       </HomeLink>
 
       <nav>
