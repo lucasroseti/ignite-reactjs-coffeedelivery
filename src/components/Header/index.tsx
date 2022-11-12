@@ -6,8 +6,12 @@ import {
   HeaderContainer,
   HomeLink,
   LocationMapLink,
+  ShoppingCartCounter,
   ShoppingCartLink,
+  ShoppingCartSection,
 } from './styles'
+
+const counter = 3
 
 export function Header() {
   return (
@@ -22,9 +26,17 @@ export function Header() {
           Porto Alegre, RS
         </LocationMapLink>
 
-        <ShoppingCartLink to="/checkout" title="Checkout">
-          <ShoppingCart size={22} weight="fill" />
-        </ShoppingCartLink>
+        <ShoppingCartSection>
+          <ShoppingCartLink to="/checkout" title="Checkout">
+            <ShoppingCart size={22} weight="fill" />
+          </ShoppingCartLink>
+
+          {counter > 0 && (
+            <ShoppingCartCounter>
+              <span>{counter}</span>
+            </ShoppingCartCounter>
+          )}
+        </ShoppingCartSection>
       </nav>
     </HeaderContainer>
   )
