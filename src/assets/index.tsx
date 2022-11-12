@@ -1,5 +1,6 @@
 // Project images
 import CoffeeDeliverySVG from './coffee-delivery.svg'
+import CoffeeDriverSVG from './coffee-driver.svg'
 import LogoCoffeeDeliverySVG from './logo-coffee-delivery.svg'
 
 // Coffees list
@@ -20,6 +21,7 @@ import MochaccinoSVG from './coffees/mochaccino.svg'
 
 export const Images = {
   CoffeeDeliverySVG,
+  CoffeeDriverSVG,
   LogoCoffeeDeliverySVG,
 }
 

@@ -1,4 +1,6 @@
-import { ItemColorBackground, IntroItem } from '../IntroItem'
+import { IntroItem } from '../IntroItem'
+
+import { ItemColorBackground } from '../../../../components/IconCustom'
 
 import {
   IntroDescription,
