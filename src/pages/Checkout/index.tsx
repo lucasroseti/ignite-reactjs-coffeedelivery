@@ -1,4 +1,6 @@
-import { FormEvent } from 'react'
+import { FormEvent, useContext } from 'react'
+
+import { CoffeesContext } from '../../contexts/CoffeesContext'
 
 import { Address } from './components/Address'
 import { Order } from './components/Order'
@@ -6,32 +8,9 @@ import { Payment } from './components/Payment'
 
 import { CheckoutContainer, CheckoutSection } from './styles'
 
-import { CoffeeListImages } from '../../assets'
-
-const order = {
-  coffees: [
-    {
-      id: 1,
-      source: CoffeeListImages.EspressoSVG,
-      name: 'Expresso Tradicional',
-      price: '9,90',
-      quantity: 0,
-    },
-    {
-      id: 2,
-      source: CoffeeListImages.LatteSVG,
-      name: 'Latte',
-      price: 'R$ 19,80',
-      quantity: 0,
-    },
-  ],
-  total: {
-    items: 29.7,
-    delivery: 3.5,
-  },
-}
-
 export function Checkout() {
+  const { order } = useContext(CoffeesContext)
+
   function handleFinishOrder(event: FormEvent) {
     event.preventDefault()
   }

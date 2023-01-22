@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import { ShoppingCart } from 'phosphor-react'
 
 import { CoffeesContext } from '../../../../contexts/CoffeesContext'
+import { Coffee } from '../../../../reducers/coffees/reducer'
 
 import { AmountInput } from '../../../../components'
 
@@ -16,15 +17,7 @@ import {
   CoffeeTags,
 } from './styles'
 
-interface CoffeeItemProps {
-  id: number
-  source: string
-  name: string
-  description: string
-  tags: string[]
-  price: string
-  quantity: number
-}
+interface CoffeeItemProps extends Coffee {}
 
 export function CoffeeItem({
   id,
@@ -35,7 +28,13 @@ export function CoffeeItem({
   price,
   quantity,
 }: CoffeeItemProps) {
-  const { alterQuantityCoffee } = useContext(CoffeesContext)
+  const { addCoffeeInOrder, alterQuantityCoffee } = useContext(CoffeesContext)
+
+  const isQuantityEqualThanZero = quantity === 0
+
+  function handleAddCoffeeInOrder(id: number) {
+    addCoffeeInOrder(id)
+  }
 
   function handleAmountQuantityChange(quantity: number) {
     alterQuantityCoffee(id, quantity)
@@ -67,7 +66,10 @@ export function CoffeeItem({
             onHandleAmountQuantityChange={handleAmountQuantityChange}
           />
 
-          <ChartButton>
+          <ChartButton
+            disabled={isQuantityEqualThanZero}
+            onClick={() => handleAddCoffeeInOrder(id)}
+          >
             <ShoppingCart size={22} weight="fill" />
           </ChartButton>
         </CoffeeActions>

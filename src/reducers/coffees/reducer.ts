@@ -12,12 +12,27 @@ export interface Coffee {
   quantity: number
 }
 
+interface Total {
+  delivery: number
+  items: number
+}
+
+export interface Order {
+  coffees: Coffee[]
+  total: Total
+}
+
 interface CoffeesState {
   coffees: Coffee[]
+  order: Order
 }
 
 export function coffeesReducer(state: CoffeesState, action: any) {
   switch (action.type) {
+    case ActionTypes.ADD_COFFEE_IN_ORDER_ACTION:
+      return produce(state, (draft) => {
+        draft.order.coffees.push(action.payload.coffee)
+      })
     case ActionTypes.ALTER_QUANTITY_COFFEE_ACTION: {
       const coffeeSelectedIndex = state.coffees.findIndex((coffee) => {
         return coffee.id === action.payload.coffeeId

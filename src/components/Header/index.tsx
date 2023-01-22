@@ -1,4 +1,7 @@
+import { useContext } from 'react'
 import { MapPin, ShoppingCart } from 'phosphor-react'
+
+import { CoffeesContext } from '../../contexts/CoffeesContext'
 
 import { Images } from '../../assets'
 
@@ -11,9 +14,11 @@ import {
   ShoppingCartSection,
 } from './styles'
 
-const counter = 3
-
 export function Header() {
+  const { order } = useContext(CoffeesContext)
+
+  const countOfCoffeesSelected = order.coffees.length
+
   return (
     <HeaderContainer>
       <HomeLink to="/" title="Home">
@@ -31,9 +36,9 @@ export function Header() {
             <ShoppingCart size={22} weight="fill" />
           </ShoppingCartLink>
 
-          {counter > 0 && (
+          {countOfCoffeesSelected > 0 && (
             <ShoppingCartCounter>
-              <span>{counter}</span>
+              <span>{countOfCoffeesSelected}</span>
             </ShoppingCartCounter>
           )}
         </ShoppingCartSection>
