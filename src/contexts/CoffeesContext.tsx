@@ -1,5 +1,7 @@
 import { createContext, ReactNode, useReducer } from 'react'
 
+import { alterQuantityCoffeeAction } from '../reducers/coffees/action'
+
 import { Coffee, coffeesReducer } from '../reducers/coffees/reducer'
 import { coffeesList } from '../data/coffees'
 
@@ -9,6 +11,7 @@ interface CoffeesContextProviderProps {
 
 interface CoffeesContextType {
   coffees: Coffee[]
+  alterQuantityCoffee: (id: number, quantity: number) => void
 }
 
 export const CoffeesContext = createContext({} as CoffeesContextType)
@@ -22,8 +25,12 @@ export function CoffeesContextProvider({
 
   const { coffees } = coffeesState
 
+  function alterQuantityCoffee(id: number, quantity: number) {
+    dispatch(alterQuantityCoffeeAction(id, quantity))
+  }
+
   return (
-    <CoffeesContext.Provider value={{ coffees }}>
+    <CoffeesContext.Provider value={{ coffees, alterQuantityCoffee }}>
       {children}
     </CoffeesContext.Provider>
   )

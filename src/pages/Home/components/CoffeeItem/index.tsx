@@ -1,4 +1,7 @@
+import { useContext } from 'react'
 import { ShoppingCart } from 'phosphor-react'
+
+import { CoffeesContext } from '../../../../contexts/CoffeesContext'
 
 import { AmountInput } from '../../../../components'
 
@@ -32,7 +35,11 @@ export function CoffeeItem({
   price,
   quantity,
 }: CoffeeItemProps) {
-  function handleAmountQuantityChange() {}
+  const { alterQuantityCoffee } = useContext(CoffeesContext)
+
+  function handleAmountQuantityChange(quantity: number) {
+    alterQuantityCoffee(id, quantity)
+  }
 
   return (
     <CoffeeItemContainer>
