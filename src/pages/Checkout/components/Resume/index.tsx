@@ -1,3 +1,6 @@
+import { useContext } from 'react'
+import { CoffeesContext } from '../../../../contexts/CoffeesContext'
+
 import { ResumeContainer, ResumeText, ResumeTotal } from './styles'
 
 interface ResumeProps {
@@ -6,27 +9,21 @@ interface ResumeProps {
 }
 
 export function Resume({ totalItems, totalDelivery }: ResumeProps) {
+  const { formatPriceToString } = useContext(CoffeesContext)
   const totalResume = totalItems + totalDelivery
-
-  function formatTotalToString(total: number) {
-    if (total === 0) return `R$ 0,00`
-
-    const [valor, cents] = String(total).split('.')
-    return `R$ ${valor},${cents.padEnd(2, '0')}`
-  }
 
   return (
     <ResumeContainer>
       <ResumeText>
         <span>Total de itens</span>{' '}
-        <span>{formatTotalToString(totalItems)}</span>
+        <span>{formatPriceToString(totalItems)}</span>
       </ResumeText>
       <ResumeText>
-        <span>Entrega</span> <span>{formatTotalToString(totalDelivery)}</span>
+        <span>Entrega</span> <span>{formatPriceToString(totalDelivery)}</span>
       </ResumeText>
       <div>
         <ResumeTotal>Total</ResumeTotal>
-        <ResumeTotal>{formatTotalToString(totalResume)}</ResumeTotal>
+        <ResumeTotal>{formatPriceToString(totalResume)}</ResumeTotal>
       </div>
     </ResumeContainer>
   )

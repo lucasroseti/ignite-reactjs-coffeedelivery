@@ -25,8 +25,16 @@ export function CoffeeSelected({
   price,
   quantity,
 }: CoffeeSelectedProps) {
-  const { alterQuantityCoffeeInOrder, removeCoffeeInOrder } =
-    useContext(CoffeesContext)
+  const {
+    alterQuantityCoffeeInOrder,
+    formatPriceToString,
+    removeCoffeeInOrder,
+  } = useContext(CoffeesContext)
+
+  const coffeeSelectedPrice = parseFloat(price.replace(',', '.'))
+  const totalPriceCoffeeSelected = formatPriceToString(
+    coffeeSelectedPrice * quantity,
+  )
 
   function handleAmountQuantityChange(quantity: number) {
     alterQuantityCoffeeInOrder(id, quantity)
@@ -55,7 +63,7 @@ export function CoffeeSelected({
             </CoffeeSelectedActions>
           </CoffeeSelectedDetails>
         </CoffeeSelectedCard>
-        <CoffeeSelectedPrice>{price}</CoffeeSelectedPrice>
+        <CoffeeSelectedPrice>{totalPriceCoffeeSelected}</CoffeeSelectedPrice>
       </CoffeeSelectedSection>
 
       <hr />

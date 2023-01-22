@@ -21,6 +21,7 @@ interface CoffeesContextType {
   alterQuantityCoffeeInOrder: (id: number, quantity: number) => void
   removeCoffeeInOrder: (id: number) => void
   alterQuantityCoffee: (id: number, quantity: number) => void
+  formatPriceToString: (price: number) => string
 }
 
 export const CoffeesContext = createContext({} as CoffeesContextType)
@@ -80,6 +81,18 @@ export function CoffeesContextProvider({
     dispatch(alterQuantityCoffeeAction(id, quantity))
   }
 
+  function formatPriceToString(total: number) {
+    if (total === 0) return `R$ 0,00`
+
+    const [valor, cents] = String(total.toFixed(2)).split('.')
+
+    const totalFormat = cents
+      ? `R$ ${valor},${cents.padEnd(2, '0')}`
+      : `R$ ${valor},00`
+
+    return totalFormat
+  }
+
   return (
     <CoffeesContext.Provider
       value={{
@@ -89,6 +102,7 @@ export function CoffeesContextProvider({
         alterQuantityCoffeeInOrder,
         removeCoffeeInOrder,
         alterQuantityCoffee,
+        formatPriceToString,
       }}
     >
       {children}

@@ -6,8 +6,8 @@ export interface Coffee {
   id: number
   source: string
   name: string
-  description: string
-  tags: string[]
+  description?: string
+  tags?: string[]
   price: string
   quantity: number
 }
