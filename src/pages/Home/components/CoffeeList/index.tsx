@@ -1,16 +1,19 @@
-import { coffeesList } from '../../../../data/coffees'
+import { Coffee } from '../../../../reducers/coffees/reducer'
 
 import { CoffeeItem } from '../CoffeeItem'
-
 import { CoffeeItems, CoffeeListContainer } from './styles'
 
-export function CoffeeList() {
+interface CoffeeListProps {
+  coffees: Coffee[]
+}
+
+export function CoffeeList({ coffees }: CoffeeListProps) {
   return (
     <CoffeeListContainer>
       <h2>Nossos Cafés</h2>
 
       <CoffeeItems>
-        {coffeesList.map((coffee) => (
+        {coffees.map((coffee) => (
           <CoffeeItem
             key={coffee.id}
             id={coffee.id}

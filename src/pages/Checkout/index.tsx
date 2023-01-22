@@ -11,14 +11,18 @@ import { CoffeeListImages } from '../../assets'
 const order = {
   coffees: [
     {
+      id: 1,
       source: CoffeeListImages.EspressoSVG,
       name: 'Expresso Tradicional',
       price: '9,90',
+      quantity: 0,
     },
     {
+      id: 2,
       source: CoffeeListImages.LatteSVG,
       name: 'Latte',
       price: 'R$ 19,80',
+      quantity: 0,
     },
   ],
   total: {
