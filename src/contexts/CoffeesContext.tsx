@@ -3,6 +3,8 @@ import { createContext, ReactNode, useEffect, useReducer } from 'react'
 import {
   addCoffeeInOrderAction,
   alterQuantityCoffeeAction,
+  alterQuantityCoffeeInOrderAction,
+  removeCoffeeInOrderAction,
 } from '../reducers/coffees/action'
 
 import { Coffee, coffeesReducer, Order } from '../reducers/coffees/reducer'
@@ -16,6 +18,8 @@ interface CoffeesContextType {
   coffees: Coffee[]
   order: Order
   addCoffeeInOrder: (id: number) => void
+  alterQuantityCoffeeInOrder: (id: number, quantity: number) => void
+  removeCoffeeInOrder: (id: number) => void
   alterQuantityCoffee: (id: number, quantity: number) => void
 }
 
@@ -64,13 +68,28 @@ export function CoffeesContextProvider({
     }
   }
 
+  function alterQuantityCoffeeInOrder(id: number, quantity: number) {
+    dispatch(alterQuantityCoffeeInOrderAction(id, quantity))
+  }
+
+  function removeCoffeeInOrder(id: number) {
+    dispatch(removeCoffeeInOrderAction(id))
+  }
+
   function alterQuantityCoffee(id: number, quantity: number) {
     dispatch(alterQuantityCoffeeAction(id, quantity))
   }
 
   return (
     <CoffeesContext.Provider
-      value={{ coffees, order, addCoffeeInOrder, alterQuantityCoffee }}
+      value={{
+        coffees,
+        order,
+        addCoffeeInOrder,
+        alterQuantityCoffeeInOrder,
+        removeCoffeeInOrder,
+        alterQuantityCoffee,
+      }}
     >
       {children}
     </CoffeesContext.Provider>

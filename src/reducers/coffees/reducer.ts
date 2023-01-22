@@ -33,6 +33,30 @@ export function coffeesReducer(state: CoffeesState, action: any) {
       return produce(state, (draft) => {
         draft.order.coffees.push(action.payload.coffee)
       })
+    case ActionTypes.REMOVE_COFFEE_IN_ORDER_ACTION: {
+      const coffeeSelectedIndex = state.order.coffees.findIndex((coffee) => {
+        return coffee.id === action.payload.coffeeId
+      })
+
+      if (coffeeSelectedIndex < 0) return state
+
+      return produce(state, (draft) => {
+        draft.order.coffees.splice(coffeeSelectedIndex, 1)
+      })
+    }
+    case ActionTypes.ALTER_QUANTITY_COFFEE_IN_ORDER_ACTION: {
+      const coffeeInOrderSelectedIndex = state.order.coffees.findIndex(
+        (coffee) => {
+          return coffee.id === action.payload.coffeeId
+        },
+      )
+
+      if (coffeeInOrderSelectedIndex < 0) return state
+      return produce(state, (draft) => {
+        draft.order.coffees[coffeeInOrderSelectedIndex].quantity =
+          action.payload.quantity
+      })
+    }
     case ActionTypes.ALTER_QUANTITY_COFFEE_ACTION: {
       const coffeeSelectedIndex = state.coffees.findIndex((coffee) => {
         return coffee.id === action.payload.coffeeId

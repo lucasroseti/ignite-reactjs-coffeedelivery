@@ -1,4 +1,9 @@
+import { useContext } from 'react'
 import { Trash } from 'phosphor-react'
+
+import { CoffeesContext } from '../../../../contexts/CoffeesContext'
+import { Coffee } from '../../../../reducers/coffees/reducer'
+
 import { AmountInput } from '../../../../components'
 
 import {
@@ -11,13 +16,7 @@ import {
   CoffeeSelectedCard,
 } from './styles'
 
-interface CoffeeSelectedProps {
-  id: number
-  source: string
-  name: string
-  price: string
-  quantity: number
-}
+interface CoffeeSelectedProps extends Coffee {}
 
 export function CoffeeSelected({
   id,
@@ -26,8 +25,16 @@ export function CoffeeSelected({
   price,
   quantity,
 }: CoffeeSelectedProps) {
-  function handleAmountQuantityChange() {}
+  const { alterQuantityCoffeeInOrder, removeCoffeeInOrder } =
+    useContext(CoffeesContext)
 
+  function handleAmountQuantityChange(quantity: number) {
+    alterQuantityCoffeeInOrder(id, quantity)
+  }
+
+  function handleRemoveCoffeeInOrder() {
+    removeCoffeeInOrder(id)
+  }
   return (
     <CoffeeSelectedContainer>
       <CoffeeSelectedSection>
@@ -41,7 +48,7 @@ export function CoffeeSelected({
                 quantity={quantity}
                 onHandleAmountQuantityChange={handleAmountQuantityChange}
               />
-              <CoffeeSelectedButton>
+              <CoffeeSelectedButton onClick={handleRemoveCoffeeInOrder}>
                 <Trash size={16} />
                 Remover
               </CoffeeSelectedButton>
