@@ -12,12 +12,22 @@ import {
 } from './styles'
 
 interface CoffeeSelectedProps {
+  id: number
   source: string
   name: string
   price: string
+  quantity: number
 }
 
-export function CoffeeSelected({ source, name, price }: CoffeeSelectedProps) {
+export function CoffeeSelected({
+  id,
+  source,
+  name,
+  price,
+  quantity,
+}: CoffeeSelectedProps) {
+  function handleAmountQuantityChange() {}
+
   return (
     <CoffeeSelectedContainer>
       <CoffeeSelectedSection>
@@ -27,7 +37,10 @@ export function CoffeeSelected({ source, name, price }: CoffeeSelectedProps) {
           <CoffeeSelectedDetails>
             <span>{name}</span>
             <CoffeeSelectedActions>
-              <AmountInput />
+              <AmountInput
+                quantity={quantity}
+                onHandleAmountQuantityChange={handleAmountQuantityChange}
+              />
               <CoffeeSelectedButton>
                 <Trash size={16} />
                 Remover

@@ -4,9 +4,11 @@ import { Resume } from '../Resume'
 import { OrderButton, OrderContainer, OrderSection } from './styles'
 
 interface CoffeesSelected {
+  id: number
   source: string
   name: string
   price: string
+  quantity: number
 }
 
 interface TotalOrder {
@@ -24,10 +26,12 @@ export function Order({ coffeesSelected, totalOrder }: OrderProps) {
     <OrderContainer>
       {coffeesSelected.map((coffeeSelected) => (
         <CoffeeSelected
-          key={coffeeSelected.name}
+          key={coffeeSelected.id}
+          id={coffeeSelected.id}
           source={coffeeSelected.source}
           name={coffeeSelected.name}
           price={coffeeSelected.price}
+          quantity={coffeeSelected.quantity}
         />
       ))}
 
