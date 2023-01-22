@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useReducer } from 'react'
+import { createContext, ReactNode, useEffect, useReducer } from 'react'
 
 import { alterQuantityCoffeeAction } from '../reducers/coffees/action'
 
@@ -19,11 +19,29 @@ export const CoffeesContext = createContext({} as CoffeesContextType)
 export function CoffeesContextProvider({
   children,
 }: CoffeesContextProviderProps) {
-  const [coffeesState, dispatch] = useReducer(coffeesReducer, {
-    coffees: coffeesList,
-  })
+  const [coffeesState, dispatch] = useReducer(
+    coffeesReducer,
+    {
+      coffees: [],
+    },
+    () => {
+      const storedStateAsJSON = localStorage.getItem(
+        '@coffeedelivery:coffees-state-1.0.0',
+      )
+
+      if (storedStateAsJSON) return JSON.parse(storedStateAsJSON)
+      return {
+        coffees: coffeesList,
+      }
+    },
+  )
 
   const { coffees } = coffeesState
+
+  useEffect(() => {
+    const stateJSON = JSON.stringify(coffeesState)
+    localStorage.setItem('@coffeedelivery:coffees-state-1.0.0', stateJSON)
+  }, [coffeesState])
 
   function alterQuantityCoffee(id: number, quantity: number) {
     dispatch(alterQuantityCoffeeAction(id, quantity))
