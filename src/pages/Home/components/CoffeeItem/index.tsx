@@ -14,20 +14,26 @@ import {
 } from './styles'
 
 interface CoffeeItemProps {
+  id: number
   source: string
   name: string
   description: string
   tags: string[]
   price: string
+  quantity: number
 }
 
 export function CoffeeItem({
+  id,
   source,
   name,
   description,
   tags,
   price,
+  quantity,
 }: CoffeeItemProps) {
+  function handleAmountQuantityChange() {}
+
   return (
     <CoffeeItemContainer>
       <img src={source} alt="" />
@@ -49,7 +55,10 @@ export function CoffeeItem({
         </CoffeePrice>
 
         <CoffeeActions>
-          <AmountInput />
+          <AmountInput
+            quantity={quantity}
+            onHandleAmountQuantityChange={handleAmountQuantityChange}
+          />
 
           <ChartButton>
             <ShoppingCart size={22} weight="fill" />

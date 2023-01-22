@@ -9,6 +9,8 @@ export function Resume({ totalItems, totalDelivery }: ResumeProps) {
   const totalResume = totalItems + totalDelivery
 
   function formatTotalToString(total: number) {
+    if (total === 0) return `R$ 0,00`
+
     const [valor, cents] = String(total).split('.')
     return `R$ ${valor},${cents.padEnd(2, '0')}`
   }
