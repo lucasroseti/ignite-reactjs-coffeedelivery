@@ -17,7 +17,7 @@ import {
 export function Header() {
   const { client, order } = useContext(CoffeesContext)
 
-  const countOfCoffeesSelected = order.coffees.length
+  const countOfCoffeesInChart = order ? order.coffees.length : 0
 
   return (
     <HeaderContainer>
@@ -28,7 +28,7 @@ export function Header() {
       <nav>
         <LocationMapLink to="/checkout" title="Checkout">
           <MapPin size={22} weight="fill" />
-          {client.address.city &&
+          {client?.address.city &&
             `${client.address.city}, ${client.address.state}`}
         </LocationMapLink>
 
@@ -37,9 +37,9 @@ export function Header() {
             <ShoppingCart size={22} weight="fill" />
           </ShoppingCartLink>
 
-          {countOfCoffeesSelected > 0 && (
+          {countOfCoffeesInChart > 0 && (
             <ShoppingCartCounter>
-              <span>{countOfCoffeesSelected}</span>
+              <span>{countOfCoffeesInChart}</span>
             </ShoppingCartCounter>
           )}
         </ShoppingCartSection>

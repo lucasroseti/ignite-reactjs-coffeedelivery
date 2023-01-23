@@ -50,7 +50,6 @@ export function Checkout() {
   const { handleSubmit, reset } = newAddressForm
 
   function handleFinishOrder(data: NewAddressFormData) {
-    console.log(data)
     addClientData(data)
     navigate('/success')
     reset()

@@ -31,10 +31,7 @@ export function CoffeeSelected({
     removeCoffeeInOrder,
   } = useContext(CoffeesContext)
 
-  const coffeeSelectedPrice = parseFloat(price.replace(',', '.'))
-  const totalPriceCoffeeSelected = formatPriceToString(
-    coffeeSelectedPrice * quantity,
-  )
+  const totalPriceCoffeeSelected = formatPriceToString(price * quantity)
 
   function handleAmountQuantityChange(quantity: number) {
     alterQuantityCoffeeInOrder(id, quantity)

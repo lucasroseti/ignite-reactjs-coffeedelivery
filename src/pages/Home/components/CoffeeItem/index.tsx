@@ -24,13 +24,14 @@ export function CoffeeItem({
   source,
   name,
   description,
-  tags,
+  tags = [],
   price,
   quantity,
 }: CoffeeItemProps) {
   const { addCoffeeInOrder, alterQuantityCoffee } = useContext(CoffeesContext)
 
   const isQuantityEqualThanZero = quantity === 0
+  const priceFormatToString = String(price).replace('.', ',')
 
   function handleAddCoffeeInOrder(id: number) {
     addCoffeeInOrder(id)
@@ -57,7 +58,7 @@ export function CoffeeItem({
       <CoffeeBuy>
         <CoffeePrice>
           <CoffeePriceSymbol>R$</CoffeePriceSymbol>
-          <CoffeePriceValue>{price}</CoffeePriceValue>
+          <CoffeePriceValue>{priceFormatToString}</CoffeePriceValue>
         </CoffeePrice>
 
         <CoffeeActions>

@@ -20,10 +20,7 @@ export function Order({ coffeesSelected, onHandleFinishOrder }: OrderProps) {
       totalItems,
       coffeeSelected,
     ) {
-      const coffeeSelectedPrice = parseFloat(
-        coffeeSelected.price.replace(',', '.'),
-      )
-      const totalCoffeeSelected = coffeeSelectedPrice * coffeeSelected.quantity
+      const totalCoffeeSelected = coffeeSelected.price * coffeeSelected.quantity
       return totalItems + totalCoffeeSelected
     },
     0)

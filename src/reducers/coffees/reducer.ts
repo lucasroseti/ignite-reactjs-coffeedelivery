@@ -22,7 +22,7 @@ export interface Coffee {
   name: string
   description?: string
   tags?: string[]
-  price: string
+  price: number
   quantity: number
 }
 
@@ -48,10 +48,23 @@ export function coffeesReducer(state: CoffeesState, action: any) {
       return produce(state, (draft) => {
         draft.client = action.payload.client
       })
-    case ActionTypes.ADD_COFFEE_IN_ORDER_ACTION:
+    case ActionTypes.ADD_COFFEE_IN_ORDER_ACTION: {
+      const coffeeInOrderSelectedIndex = state.order.coffees.findIndex(
+        (coffee) => {
+          return coffee.id === action.payload.coffee.id
+        },
+      )
+
+      if (coffeeInOrderSelectedIndex < 0)
+        return produce(state, (draft) => {
+          draft.order.coffees.push(action.payload.coffee)
+        })
+
       return produce(state, (draft) => {
-        draft.order.coffees.push(action.payload.coffee)
+        draft.order.coffees[coffeeInOrderSelectedIndex].quantity =
+          action.payload.coffee.quantity
       })
+    }
     case ActionTypes.REMOVE_COFFEE_IN_ORDER_ACTION: {
       const coffeeSelectedIndex = state.order.coffees.findIndex((coffee) => {
         return coffee.id === action.payload.coffeeId

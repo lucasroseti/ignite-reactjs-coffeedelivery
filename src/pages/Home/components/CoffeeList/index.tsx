@@ -7,7 +7,7 @@ interface CoffeeListProps {
   coffees: Coffee[]
 }
 
-export function CoffeeList({ coffees }: CoffeeListProps) {
+export function CoffeeList({ coffees = [] }: CoffeeListProps) {
   return (
     <CoffeeListContainer>
       <h2>Nossos Cafés</h2>
