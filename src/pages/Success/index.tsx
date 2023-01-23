@@ -1,3 +1,7 @@
+import { useContext } from 'react'
+
+import { CoffeesContext } from '../../contexts/CoffeesContext'
+
 import { Detail } from './components/Detail'
 
 import {
@@ -9,23 +13,13 @@ import {
 
 import { Images } from '../../assets'
 
-const order = {
-  address: {
-    address: 'Rua João Daniel Martinelli',
-    number: '102',
-    neighborhood: 'Farrapos',
-    city: 'Porto Alegre',
-    state: 'RS',
-  },
-  payment: 'Cartão de Crédito',
-  delivery: {
-    start: '20',
-    end: '30',
-  },
+const delivery = {
+  start: '20',
+  end: '30',
 }
 
 export function Success() {
-  const { address, delivery, payment } = order
+  const { client } = useContext(CoffeesContext)
 
   return (
     <SuccessContainer>
@@ -39,11 +33,12 @@ export function Success() {
               <p>
                 Entrega em{' '}
                 <span>
-                  {order.address.address}, {address.number}
+                  {client.address.street}, {client.address.number}
                 </span>
               </p>
               <p>
-                {address.neighborhood} - {address.city}, {address.state}
+                {client.address.neighborhood} - {client.address.city},{' '}
+                {client.address.state}
               </p>
             </Detail>
 
@@ -56,7 +51,7 @@ export function Success() {
 
             <Detail background="yellow-dark" icon="CurrencyDollar">
               <p>Pagamento na entrega</p>
-              <span>{payment}</span>
+              <span>{client.payment}</span>
             </Detail>
           </SuccessDetails>
         </SuccessBorder>

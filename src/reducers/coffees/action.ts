@@ -1,11 +1,22 @@
-import { Coffee } from './reducer'
+import { Client, Coffee } from './reducer'
 
 export enum ActionTypes {
+  ADD_DATA_CLIENT_ACTION = 'ADD_DATA_CLIENT_ACTION',
+
   ADD_COFFEE_IN_ORDER_ACTION = 'ADD_COFFEE_IN_ORDER_ACTION',
   ALTER_QUANTITY_COFFEE_IN_ORDER_ACTION = 'ALTER_QUANTITY_COFFEE_IN_ORDER_ACTION',
   REMOVE_COFFEE_IN_ORDER_ACTION = 'REMOVE_COFFEE_IN_ORDER_ACTION',
 
   ALTER_QUANTITY_COFFEE_ACTION = 'ALTER_QUANTITY_COFFEE_ACTION',
+}
+
+export function addDataClientAction(client: Client) {
+  return {
+    type: ActionTypes.ADD_DATA_CLIENT_ACTION,
+    payload: {
+      client,
+    },
+  }
 }
 
 export function addCoffeeInOrderAction(coffee: Coffee) {

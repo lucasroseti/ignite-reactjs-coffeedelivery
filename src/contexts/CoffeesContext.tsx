@@ -2,12 +2,18 @@ import { createContext, ReactNode, useEffect, useReducer } from 'react'
 
 import {
   addCoffeeInOrderAction,
+  addDataClientAction,
   alterQuantityCoffeeAction,
   alterQuantityCoffeeInOrderAction,
   removeCoffeeInOrderAction,
 } from '../reducers/coffees/action'
 
-import { Coffee, coffeesReducer, Order } from '../reducers/coffees/reducer'
+import {
+  Client,
+  Coffee,
+  coffeesReducer,
+  Order,
+} from '../reducers/coffees/reducer'
 import { coffeesList } from '../data/coffees'
 
 interface CoffeesContextProviderProps {
@@ -15,8 +21,10 @@ interface CoffeesContextProviderProps {
 }
 
 interface CoffeesContextType {
+  client: Client
   coffees: Coffee[]
   order: Order
+  addClientData: (data: Client) => void
   addCoffeeInOrder: (id: number) => void
   alterQuantityCoffeeInOrder: (id: number, quantity: number) => void
   removeCoffeeInOrder: (id: number) => void
@@ -30,6 +38,10 @@ export function CoffeesContextProvider({
   children,
 }: CoffeesContextProviderProps) {
   const contextInitialize = {
+    client: {
+      address: {},
+      payment: '',
+    },
     coffees: coffeesList,
     order: {
       coffees: [],
@@ -54,12 +66,16 @@ export function CoffeesContextProvider({
     },
   )
 
-  const { coffees, order } = coffeesState
+  const { client, coffees, order } = coffeesState
 
   useEffect(() => {
     const stateJSON = JSON.stringify(coffeesState)
     localStorage.setItem('@coffeedelivery:coffees-state-1.0.0', stateJSON)
   }, [coffeesState])
+
+  function addClientData(data: Client) {
+    dispatch(addDataClientAction(data))
+  }
 
   function addCoffeeInOrder(id: number) {
     const coffeeSelected = coffees.find((coffee) => coffee.id === id)
@@ -96,8 +112,10 @@ export function CoffeesContextProvider({
   return (
     <CoffeesContext.Provider
       value={{
+        client,
         coffees,
         order,
+        addClientData,
         addCoffeeInOrder,
         alterQuantityCoffeeInOrder,
         removeCoffeeInOrder,

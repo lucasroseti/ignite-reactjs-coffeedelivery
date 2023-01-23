@@ -1,4 +1,8 @@
-import { FormEvent, useContext } from 'react'
+import { useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useForm, FormProvider } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as zod from 'zod'
 
 import { CoffeesContext } from '../../contexts/CoffeesContext'
 
@@ -8,26 +12,68 @@ import { Payment } from './components/Payment'
 
 import { CheckoutContainer, CheckoutSection } from './styles'
 
-export function Checkout() {
-  const { order } = useContext(CoffeesContext)
+const newAddressFormValidationSchema = zod.object({
+  address: zod.object({
+    zipcode: zod.string().min(7, 'Informe o cep'),
+    street: zod.string().min(6, 'Informe a rua'),
+    additional: zod.string().optional(),
+    number: zod.string().min(2, 'Informe o número'),
+    neighborhood: zod.string().min(4, 'Informe o bairro'),
+    city: zod.string().min(4, 'Informe a cidade'),
+    state: zod.string().min(2, 'Informe o estado'),
+  }),
+  payment: zod.string(),
+})
 
-  function handleFinishOrder(event: FormEvent) {
-    event.preventDefault()
+type NewAddressFormData = zod.infer<typeof newAddressFormValidationSchema>
+
+export function Checkout() {
+  const navigate = useNavigate()
+
+  const { order, addClientData } = useContext(CoffeesContext)
+
+  const newAddressForm = useForm<NewAddressFormData>({
+    resolver: zodResolver(newAddressFormValidationSchema),
+    defaultValues: {
+      address: {
+        zipcode: '',
+        street: '',
+        number: '',
+        neighborhood: '',
+        city: '',
+        state: '',
+      },
+      payment: '',
+    },
+  })
+
+  const { handleSubmit, reset } = newAddressForm
+
+  function handleFinishOrder(data: NewAddressFormData) {
+    console.log(data)
+    addClientData(data)
+    navigate('/success')
+    reset()
   }
 
   return (
     <CheckoutContainer>
-      <form onSubmit={handleFinishOrder}>
+      <form>
         <CheckoutSection>
           <h2>Complete seu pedido</h2>
 
-          <Address />
-          <Payment />
+          <FormProvider {...newAddressForm}>
+            <Address />
+            <Payment />
+          </FormProvider>
         </CheckoutSection>
 
         <CheckoutSection>
           <h2>Cafés selecionados</h2>
-          <Order coffeesSelected={order.coffees} totalOrder={order.total} />
+          <Order
+            coffeesSelected={order.coffees}
+            onHandleFinishOrder={handleSubmit(handleFinishOrder)}
+          />
         </CheckoutSection>
       </form>
     </CheckoutContainer>

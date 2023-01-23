@@ -9,9 +9,10 @@ interface CoffeesSelected extends Coffee {}
 
 interface OrderProps {
   coffeesSelected: CoffeesSelected[]
+  onHandleFinishOrder: () => void
 }
 
-export function Order({ coffeesSelected }: OrderProps) {
+export function Order({ coffeesSelected, onHandleFinishOrder }: OrderProps) {
   const totalDelivery = 8.0
 
   function totalItems() {
@@ -46,7 +47,9 @@ export function Order({ coffeesSelected }: OrderProps) {
       <OrderSection>
         <Resume totalItems={totalItems()} totalDelivery={totalDelivery} />
 
-        <OrderButton href="/success">Confirmar Pedido</OrderButton>
+        <OrderButton onClick={onHandleFinishOrder}>
+          Confirmar Pedido
+        </OrderButton>
       </OrderSection>
     </OrderContainer>
   )

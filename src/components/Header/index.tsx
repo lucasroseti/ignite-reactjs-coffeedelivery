@@ -15,7 +15,7 @@ import {
 } from './styles'
 
 export function Header() {
-  const { order } = useContext(CoffeesContext)
+  const { client, order } = useContext(CoffeesContext)
 
   const countOfCoffeesSelected = order.coffees.length
 
@@ -28,7 +28,8 @@ export function Header() {
       <nav>
         <LocationMapLink to="/checkout" title="Checkout">
           <MapPin size={22} weight="fill" />
-          Porto Alegre, RS
+          {client.address.city &&
+            `${client.address.city}, ${client.address.state}`}
         </LocationMapLink>
 
         <ShoppingCartSection>
