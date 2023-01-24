@@ -57,3 +57,8 @@ export const AddressInputCustom = styled.div`
     margin-left: -4rem;
   }
 `
+
+export const AddressMessageSection = styled.div`
+  display: flex;
+  justify-content: space-between;
+`

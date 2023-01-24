@@ -2,17 +2,23 @@ import { useFormContext } from 'react-hook-form'
 import { MapPinLine } from 'phosphor-react'
 
 import { Title } from '../Title'
-
+import { MessageError } from '../../../../components'
 import {
   AddressContainer,
   AddressColumn,
   AddressInput,
   AddressInputCustom,
   AddressSection,
+  AddressMessageSection,
 } from './styles'
 
 export function Address() {
-  const { register } = useFormContext()
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext()
+
+  const { address } = errors
 
   return (
     <AddressContainer>
@@ -25,59 +31,89 @@ export function Address() {
       </Title>
 
       <AddressSection>
-        <AddressColumn>
-          <AddressInput
-            type="text"
-            placeholder="CEP"
-            widthInput={12.5}
-            {...register('address.zipcode')}
-          />
-        </AddressColumn>
-        <AddressColumn>
-          <AddressInput
-            type="text"
-            placeholder="Rua"
-            widthInput={35}
-            {...register('address.street')}
-          />
-        </AddressColumn>
-        <AddressColumn>
-          <AddressInput
-            type="text"
-            placeholder="Número"
-            widthInput={12.5}
-            {...register('address.number')}
-          />
-          <AddressInputCustom>
+        <div>
+          <AddressColumn>
             <AddressInput
               type="text"
-              placeholder="Complemento"
-              widthInput={21.75}
-              {...register('address.additional')}
+              placeholder="CEP"
+              widthInput={12.5}
+              {...register('address.zipcode')}
             />
-            <span>Opcional</span>
-          </AddressInputCustom>
-        </AddressColumn>
-        <AddressColumn>
-          <AddressInput
-            type="text"
-            placeholder="Bairro"
-            widthInput={12.5}
-            {...register('address.neighborhood')}
-          />
-          <AddressInput
-            type="text"
-            placeholder="Cidade"
-            widthInput={17.25}
-            {...register('address.city')}
-          />
-          <AddressInput
-            type="text"
-            placeholder="UF"
-            widthInput={3.75}
-            {...register('address.state')}
-          />
-        </AddressColumn>
+          </AddressColumn>
+          {address?.zipcode?.message && (
+            <MessageError message={String(address?.zipcode?.message)} />
+          )}
+        </div>
+
+        <div>
+          <AddressColumn>
+            <AddressInput
+              type="text"
+              placeholder="Rua"
+              widthInput={35}
+              {...register('address.street')}
+            />
+          </AddressColumn>
+          {address?.street?.message && (
+            <MessageError message={String(address?.street?.message)} />
+          )}
+        </div>
+
+        <div>
+          <AddressColumn>
+            <AddressInput
+              type="text"
+              placeholder="Número"
+              widthInput={12.5}
+              {...register('address.number')}
+            />
+            <AddressInputCustom>
+              <AddressInput
+                type="text"
+                placeholder="Complemento"
+                widthInput={21.75}
+                {...register('address.additional')}
+              />
+              <span>Opcional</span>
+            </AddressInputCustom>
+          </AddressColumn>
+          {address?.number?.message && (
+            <MessageError message={String(address?.number?.message)} />
+          )}
+        </div>
+        <div>
+          <AddressColumn>
+            <AddressInput
+              type="text"
+              placeholder="Bairro"
+              widthInput={12.5}
+              {...register('address.neighborhood')}
+            />
+            <AddressInput
+              type="text"
+              placeholder="Cidade"
+              widthInput={17.25}
+              {...register('address.city')}
+            />
+            <AddressInput
+              type="text"
+              placeholder="UF"
+              widthInput={3.75}
+              {...register('address.state')}
+            />
+          </AddressColumn>
+          <AddressMessageSection>
+            {address?.neighborhood?.message && (
+              <MessageError message={String(address?.neighborhood?.message)} />
+            )}
+            {address?.city?.message && (
+              <MessageError message={String(address?.city?.message)} />
+            )}
+            {address?.state?.message && (
+              <MessageError message={String(address?.state?.message)} />
+            )}
+          </AddressMessageSection>
+        </div>
       </AddressSection>
     </AddressContainer>
   )

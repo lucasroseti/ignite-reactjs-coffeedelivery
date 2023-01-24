@@ -14,7 +14,7 @@ import { CheckoutContainer, CheckoutSection } from './styles'
 
 const newAddressFormValidationSchema = zod.object({
   address: zod.object({
-    zipcode: zod.string().min(7, 'Informe o cep'),
+    zipcode: zod.string().min(8, 'Informe o cep'),
     street: zod.string().min(6, 'Informe a rua'),
     additional: zod.string().optional(),
     number: zod.string().min(2, 'Informe o número'),
@@ -22,7 +22,7 @@ const newAddressFormValidationSchema = zod.object({
     city: zod.string().min(4, 'Informe a cidade'),
     state: zod.string().min(2, 'Informe o estado'),
   }),
-  payment: zod.string(),
+  payment: zod.string().min(2, 'Informe o pagamento'),
 })
 
 type NewAddressFormData = zod.infer<typeof newAddressFormValidationSchema>

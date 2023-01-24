@@ -9,6 +9,8 @@ export const PaymentContainer = styled.div`
   gap: 2rem;
 `
 
+export const PaymentContent = styled.div``
+
 export const PaymentOptions = styled.div`
   display: flex;
   gap: 0.75rem;
