@@ -1,4 +1,5 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { CheckoutContext } from '../../contexts/CheckoutContext'
 
@@ -19,7 +20,12 @@ const delivery = {
 }
 
 export function Success() {
+  const navigate = useNavigate()
   const { client } = useContext(CheckoutContext)
+
+  useEffect(() => {
+    if (client.address.zipcode === '') navigate('/checkout')
+  })
 
   return (
     <SuccessContainer>

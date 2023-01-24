@@ -44,9 +44,11 @@ export function Order({ coffeesSelected, onHandleFinishOrder }: OrderProps) {
       <OrderSection>
         <Resume totalItems={totalItems()} totalDelivery={totalDelivery} />
 
-        <OrderButton onClick={onHandleFinishOrder}>
-          Confirmar Pedido
-        </OrderButton>
+        {coffeesSelected.length > 0 && (
+          <OrderButton onClick={onHandleFinishOrder}>
+            Confirmar Pedido
+          </OrderButton>
+        )}
       </OrderSection>
     </OrderContainer>
   )
