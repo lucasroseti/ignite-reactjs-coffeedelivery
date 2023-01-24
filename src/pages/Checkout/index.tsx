@@ -4,7 +4,7 @@ import { useForm, FormProvider } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as zod from 'zod'
 
-import { CoffeesContext } from '../../contexts/CoffeesContext'
+import { CheckoutContext } from '../../contexts/CheckoutContext'
 
 import { Address } from './components/Address'
 import { Order } from './components/Order'
@@ -30,7 +30,7 @@ type NewAddressFormData = zod.infer<typeof newAddressFormValidationSchema>
 export function Checkout() {
   const navigate = useNavigate()
 
-  const { order, addClientData } = useContext(CoffeesContext)
+  const { order, addClientDataInOrder } = useContext(CheckoutContext)
 
   const newAddressForm = useForm<NewAddressFormData>({
     resolver: zodResolver(newAddressFormValidationSchema),
@@ -50,7 +50,7 @@ export function Checkout() {
   const { handleSubmit, reset } = newAddressForm
 
   function handleFinishOrder(data: NewAddressFormData) {
-    addClientData(data)
+    addClientDataInOrder(data)
     navigate('/success')
     reset()
   }

@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { Trash } from 'phosphor-react'
 
-import { CoffeesContext } from '../../../../contexts/CoffeesContext'
+import { CheckoutContext } from '../../../../contexts/CheckoutContext'
 import { Coffee } from '../../../../reducers/coffees/reducer'
 
 import { AmountInput } from '../../../../components'
@@ -29,7 +29,7 @@ export function CoffeeSelected({
     alterQuantityCoffeeInOrder,
     formatPriceToString,
     removeCoffeeInOrder,
-  } = useContext(CoffeesContext)
+  } = useContext(CheckoutContext)
 
   const totalPriceCoffeeSelected = formatPriceToString(price * quantity)
 

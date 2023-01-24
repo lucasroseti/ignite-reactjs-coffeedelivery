@@ -1,6 +1,7 @@
 import { BrowserRouter } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
-import { CoffeesContextProvider } from './contexts/CoffeesContext'
+
+import { CheckoutContextProvider, CoffeesContextProvider } from './contexts'
 
 import { Router } from './Router'
 
@@ -12,7 +13,9 @@ export function App() {
     <ThemeProvider theme={defaultTheme}>
       <BrowserRouter>
         <CoffeesContextProvider>
-          <Router />
+          <CheckoutContextProvider>
+            <Router />
+          </CheckoutContextProvider>
         </CoffeesContextProvider>
       </BrowserRouter>
       <GlobalStyle />

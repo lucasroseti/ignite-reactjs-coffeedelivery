@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { MapPin, ShoppingCart } from 'phosphor-react'
 
-import { CoffeesContext } from '../../contexts/CoffeesContext'
+import { CheckoutContext } from '../../contexts/CheckoutContext'
 
 import { Images } from '../../assets'
 
@@ -15,7 +15,7 @@ import {
 } from './styles'
 
 export function Header() {
-  const { client, order } = useContext(CoffeesContext)
+  const { client, order } = useContext(CheckoutContext)
 
   const countOfCoffeesInChart = order ? order.coffees.length : 0
 

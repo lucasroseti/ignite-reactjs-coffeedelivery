@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 
-import { CoffeesContext } from '../../contexts/CoffeesContext'
+import { CheckoutContext } from '../../contexts/CheckoutContext'
 
 import { Detail } from './components/Detail'
 
@@ -19,7 +19,7 @@ const delivery = {
 }
 
 export function Success() {
-  const { client } = useContext(CoffeesContext)
+  const { client } = useContext(CheckoutContext)
 
   return (
     <SuccessContainer>

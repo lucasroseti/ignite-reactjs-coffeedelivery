@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 import { ShoppingCart } from 'phosphor-react'
 
+import { CheckoutContext } from '../../../../contexts/CheckoutContext'
 import { CoffeesContext } from '../../../../contexts/CoffeesContext'
 import { Coffee } from '../../../../reducers/coffees/reducer'
 
@@ -28,7 +29,8 @@ export function CoffeeItem({
   price,
   quantity,
 }: CoffeeItemProps) {
-  const { addCoffeeInOrder, alterQuantityCoffee } = useContext(CoffeesContext)
+  const { addCoffeeInOrder } = useContext(CheckoutContext)
+  const { alterQuantityCoffee } = useContext(CoffeesContext)
 
   const isQuantityEqualThanZero = quantity === 0
   const priceFormatToString = String(price).replace('.', ',')

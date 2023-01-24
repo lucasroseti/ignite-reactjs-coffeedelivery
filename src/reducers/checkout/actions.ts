@@ -1,22 +1,12 @@
-import { Client, Coffee } from './reducer'
+import { Client } from './reducer'
+import { Coffee } from '../coffees/reducer'
 
 export enum ActionTypes {
-  ADD_DATA_CLIENT_ACTION = 'ADD_DATA_CLIENT_ACTION',
+  ADD_DATA_CLIENT_IN_ORDER_ACTION = 'ADD_DATA_CLIENT_IN_ORDER_ACTION',
 
   ADD_COFFEE_IN_ORDER_ACTION = 'ADD_COFFEE_IN_ORDER_ACTION',
   ALTER_QUANTITY_COFFEE_IN_ORDER_ACTION = 'ALTER_QUANTITY_COFFEE_IN_ORDER_ACTION',
   REMOVE_COFFEE_IN_ORDER_ACTION = 'REMOVE_COFFEE_IN_ORDER_ACTION',
-
-  ALTER_QUANTITY_COFFEE_ACTION = 'ALTER_QUANTITY_COFFEE_ACTION',
-}
-
-export function addDataClientAction(client: Client) {
-  return {
-    type: ActionTypes.ADD_DATA_CLIENT_ACTION,
-    payload: {
-      client,
-    },
-  }
 }
 
 export function addCoffeeInOrderAction(coffee: Coffee) {
@@ -28,11 +18,11 @@ export function addCoffeeInOrderAction(coffee: Coffee) {
   }
 }
 
-export function removeCoffeeInOrderAction(coffeeId: number) {
+export function addDataClientInOrderAction(client: Client) {
   return {
-    type: ActionTypes.REMOVE_COFFEE_IN_ORDER_ACTION,
+    type: ActionTypes.ADD_DATA_CLIENT_IN_ORDER_ACTION,
     payload: {
-      coffeeId,
+      client,
     },
   }
 }
@@ -50,12 +40,11 @@ export function alterQuantityCoffeeInOrderAction(
   }
 }
 
-export function alterQuantityCoffeeAction(coffeeId: number, quantity: number) {
+export function removeCoffeeInOrderAction(coffeeId: number) {
   return {
-    type: ActionTypes.ALTER_QUANTITY_COFFEE_ACTION,
+    type: ActionTypes.REMOVE_COFFEE_IN_ORDER_ACTION,
     payload: {
       coffeeId,
-      quantity,
     },
   }
 }

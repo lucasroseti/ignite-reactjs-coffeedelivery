@@ -1,5 +1,6 @@
 import { useContext } from 'react'
-import { CoffeesContext } from '../../../../contexts/CoffeesContext'
+
+import { CheckoutContext } from '../../../../contexts/CheckoutContext'
 
 import { ResumeContainer, ResumeText, ResumeTotal } from './styles'
 
@@ -9,7 +10,7 @@ interface ResumeProps {
 }
 
 export function Resume({ totalItems, totalDelivery }: ResumeProps) {
-  const { formatPriceToString } = useContext(CoffeesContext)
+  const { formatPriceToString } = useContext(CheckoutContext)
   const totalResume = totalItems + totalDelivery
 
   return (
