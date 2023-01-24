@@ -30,20 +30,20 @@ type NewAddressFormData = zod.infer<typeof newAddressFormValidationSchema>
 export function Checkout() {
   const navigate = useNavigate()
 
-  const { order, addClientDataInOrder } = useContext(CheckoutContext)
+  const { client, order, addClientDataInOrder } = useContext(CheckoutContext)
 
   const newAddressForm = useForm<NewAddressFormData>({
     resolver: zodResolver(newAddressFormValidationSchema),
     defaultValues: {
       address: {
-        zipcode: '',
-        street: '',
-        number: '',
-        neighborhood: '',
-        city: '',
-        state: '',
+        zipcode: client.address.zipcode,
+        street: client.address.street,
+        number: client.address.number,
+        neighborhood: client.address.neighborhood,
+        city: client.address.city,
+        state: client.address.state,
       },
-      payment: '',
+      payment: client.payment,
     },
   })
 
@@ -63,7 +63,7 @@ export function Checkout() {
 
           <FormProvider {...newAddressForm}>
             <Address />
-            <Payment />
+            <Payment paymentSelected={client.payment} />
           </FormProvider>
         </CheckoutSection>
 

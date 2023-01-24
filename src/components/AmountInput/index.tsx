@@ -35,6 +35,7 @@ export function AmountInput({
   return (
     <AmountInputContainer>
       <AmountButton
+        type="button"
         disabled={isValueAmountEqualThanZero}
         onClick={() => handleAmount(!isSum)}
       >
@@ -53,6 +54,7 @@ export function AmountInput({
       />
 
       <AmountButton
+        type="button"
         disabled={isValueAmountEqualThanTen}
         onClick={() => handleAmount(isSum)}
       >
