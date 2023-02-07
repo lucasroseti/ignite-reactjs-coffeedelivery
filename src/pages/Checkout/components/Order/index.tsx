@@ -15,6 +15,8 @@ interface OrderProps {
 export function Order({ coffeesSelected, onHandleFinishOrder }: OrderProps) {
   const totalDelivery = 8.0
 
+  const isCoffeeSelectedGreaterThanZero = coffeesSelected.length > 0
+
   function totalItems() {
     const totalItems = coffeesSelected.reduce(function (
       totalItems,
@@ -44,7 +46,7 @@ export function Order({ coffeesSelected, onHandleFinishOrder }: OrderProps) {
       <OrderSection>
         <Resume totalItems={totalItems()} totalDelivery={totalDelivery} />
 
-        {coffeesSelected.length > 0 && (
+        {isCoffeeSelectedGreaterThanZero && (
           <OrderButton onClick={onHandleFinishOrder}>
             Confirmar Pedido
           </OrderButton>

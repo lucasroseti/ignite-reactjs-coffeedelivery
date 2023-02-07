@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { Bank, CreditCard, CurrencyDollar, Money } from 'phosphor-react'
 
@@ -19,6 +20,7 @@ export function Payment({ paymentSelected }: PaymentProps) {
     setValue,
     formState: { errors },
   } = useFormContext()
+  const [isPaymentSelected, setIsPaymentSelected] = useState(false)
 
   const isPaymentCredit = paymentSelected === 'Cartão de crédito'
   const isPaymentDebit = paymentSelected === 'Cartão de débito'
@@ -26,6 +28,7 @@ export function Payment({ paymentSelected }: PaymentProps) {
 
   function handlePaymentSelected(typePayment: string) {
     setValue('payment', typePayment)
+    setIsPaymentSelected(true)
   }
 
   return (
@@ -63,7 +66,7 @@ export function Payment({ paymentSelected }: PaymentProps) {
           </PaymentButton>
         </PaymentOptions>
 
-        {errors?.payment && (
+        {!isPaymentSelected && errors.payment && (
           <MessageError message={String(errors?.payment?.message)} />
         )}
       </PaymentContent>
